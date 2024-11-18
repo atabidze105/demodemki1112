@@ -1,0 +1,184 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="demo1112remake.ListWindow"
+        Title="ListWindow"
+		x:CompileBindings="False">
+	<Grid
+		Name="grid_listWindow"
+		ShowGridLines="False"
+		ColumnDefinitions="*,*,*,*"
+		RowDefinitions="auto,*">
+		<TextBox
+			Name="tbox_searchbar"
+			Watermark="Найти..."
+			Text=""
+			VerticalAlignment="Center"
+			Grid.ColumnSpan="1"
+			KeyUp="TextInput"/>
+		<StackPanel
+			Orientation="Horizontal"
+			Grid.Column="1" VerticalAlignment="Center">
+			<ComboBox 
+				Name="cbox_sorting"
+				SelectedIndex="0"
+				SelectionChanged="ComboBox_SortingSelectionChanged">
+				<ComboBoxItem Content="По умолчанию"/>
+				<ComboBoxItem Content="По стоимости (по возрастанию)"/>
+				<ComboBoxItem Content="По стоимости (по убыванию)"/>
+			</ComboBox>
+			<ComboBox
+				Name="cbox_filtration"
+				SelectedIndex="0"
+				SelectionChanged="ComboBox_FiltrationSelectionChanged">
+				<ComboBoxItem Content="Все диапазоны"/>
+				<ComboBoxItem Content="0% - 10%"/>
+				<ComboBoxItem Content="10% - 15%"/>
+				<ComboBoxItem Content="Более 15%"/>
+			</ComboBox>
+			
+		</StackPanel>
+		<StackPanel
+			HorizontalAlignment="Right"
+			Grid.ColumnSpan="4">
+			<StackPanel
+				Orientation="Horizontal">
+				<TextBlock
+					Name="tblock_login"
+					Text="Выполнен вход: "/>
+				<TextBlock
+					Text="{Binding Firstname}"/>
+				<TextBlock
+					Text=" "/>
+				<TextBlock
+					Text="{Binding Name}"/>
+				<TextBlock
+					Text=" "/>
+				<TextBlock
+					Text="{Binding Lastname}"/>
+			</StackPanel>
+			
+			<Button
+				Name="btn_add"
+				Content="Добавить новый товар"
+				Background="rgb(73, 140,81)"
+				Click="addProduct"/>
+			<Button
+				Content="Выйти"
+				Click="RetutnToMain"
+				HorizontalAlignment="Right"
+				Background="rgb(73, 140,81)"/>
+		</StackPanel>
+		<TextBlock
+			Name="tblock_itemsCount"
+			Text=""
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom"
+			Margin="0 50 0 0"
+			Grid.ColumnSpan="4"/>
+		<ListBox
+			Name="lbox_products"
+			Grid.Row="1" Grid.ColumnSpan="4"
+			Background="rgb(118, 227, 131)">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Panel
+						Height="150"
+						Background="{Binding DiscountColor}"
+						DoubleTapped="Panel_DoubleTapped">
+						<Grid
+							ColumnDefinitions="*,2*,0.5*,*"
+							ShowGridLines="False">
+							<Border
+								BorderBrush="Black"
+								BorderThickness="1"
+								Margin="5">
+								<Image
+									Source="{Binding ProductImage}"
+									Margin="15"/>
+							</Border>
+							<Border
+								BorderBrush="Black"
+								BorderThickness="1"
+								Grid.Column="1"
+								Margin="5">
+								<StackPanel
+									Margin="10 0">
+									<TextBlock
+										Text="{Binding Name}"
+										FontWeight="Bold"
+										Margin="0 0 0 15"/>
+									<TextBlock
+										Text="{Binding Description}"
+										TextWrapping="WrapWithOverflow"
+										Margin="0 15"/>
+									<StackPanel
+										Orientation="Horizontal"
+										Margin="0 15 0 0">
+										<TextBlock
+											Text="Производитель: "/>
+										<TextBlock
+											Text="{Binding ManufacturerNavigation.Name}"/>
+									</StackPanel>
+								</StackPanel>
+							</Border>
+							<Border
+								BorderBrush="Black"
+								BorderThickness="1"
+								Grid.Column="2"
+								Margin="5 30">
+								<StackPanel
+									Orientation="Horizontal"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center">
+									<TextBlock
+										Text="{Binding ActualDiscount}"/>
+									<TextBlock
+										Text="%"/>
+								</StackPanel>
+							</Border>
+							<Border
+								BorderBrush="Black"
+								BorderThickness="1"
+								Grid.Column="3"
+								Margin="5 30">
+								<StackPanel
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center">
+									<StackPanel
+										Orientation="Horizontal">
+										<TextBlock
+											Text="{Binding PriceDiscount}"/>
+										<TextBlock
+											Text=" руб."/>
+									</StackPanel>
+									<StackPanel
+										Orientation="Horizontal"
+										IsVisible="{Binding IsDiscounted}">
+										<TextBlock
+											Text="{Binding Price}"
+											TextDecorations="Strikethrough"/>
+										<TextBlock
+											Text=" руб."/>
+									</StackPanel>
+									<StackPanel
+										Orientation="Horizontal">
+										<TextBlock
+											Text="Осталось: "/>
+										<TextBlock
+											Text="{Binding QuantityStored}"/>
+										<TextBlock
+											Text="{Binding Measure}"/>
+									</StackPanel>
+
+								</StackPanel>
+							</Border>
+						</Grid>
+					</Panel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</Window>

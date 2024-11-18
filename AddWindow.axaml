@@ -1,0 +1,155 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+		MinHeight="750" MinWidth="800"
+		x:Class="demo1112remake.AddWindow"
+        Title="AddWindow"
+		x:CompileBindings="False"
+		WindowStartupLocation="CenterOwner">
+	<Grid
+		Name="grid_addWindow"
+		ShowGridLines="false"
+		ColumnDefinitions="*,3*,*"
+		RowDefinitions="*,5*,*"
+		Background="rgb(118, 227, 131)">
+		<Panel
+			Grid.Column="1"
+			Grid.Row="1"
+			Background="white"
+			Width="450"
+			Height="550">
+			<Grid
+				ShowGridLines="false"
+				RowDefinitions="auto,*,auto"
+				ColumnDefinitions="1.5*,*">
+				<TextBlock
+					Name="tblock_header"
+					FontSize="18" HorizontalAlignment="Center" Margin="5"
+					Grid.ColumnSpan="2"/>
+				<StackPanel
+					Grid.Row="1">
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock Text="ID: "/>
+						<TextBlock Text="{Binding Id}"/>
+					</StackPanel>
+					<TextBox
+						Name="tbox_articul"
+						Watermark="артикул"
+						Text="{Binding Articul}"/>
+					<TextBox
+						Name="tbox_name"
+						Watermark="Название"
+						Text="{Binding Name}"/>
+					<TextBox
+						Name="tbox_description"
+						Watermark="Описание"
+						Text="{Binding Description}"
+						Height="100" TextWrapping="WrapWithOverflow"/>
+					<StackPanel
+						Orientation="Horizontal">
+						<StackPanel>
+							<TextBlock
+								Text="производитель "/>
+							<ComboBox
+								Name="cbox_man"/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock
+								Text="поставщик "/>
+							<ComboBox
+								Name="cbox_sup"/>
+						</StackPanel>
+						<StackPanel>
+							<TextBlock
+								Text="категория"/>
+							<ComboBox
+								Name="cbox_cat"/>
+						</StackPanel>
+					</StackPanel>
+					<TextBox
+						Name="tbox_price"
+						Text="{Binding Price}"
+						Watermark="Цена"/>
+					<TextBox
+						Name="tbox_measure"
+						Text="{Binding Measure}"
+						Watermark="система измерений"/>
+					<TextBlock
+						Text="макс. скидка"/>
+					<TextBox
+						Name="tbox_discountmax"
+						Text="{Binding MaxDiscount}"/>
+					<TextBlock
+						Text="текущ. скидка"/>
+					<TextBox
+						Name="tbox_discountcurrent"
+						Text="{Binding ActualDiscount}"/>
+					<TextBlock
+						Text="кол-во на складе"/>
+					<TextBox
+						Name="tbox_discountcurr"
+						Text="{Binding QuantityStored}"/>
+
+				</StackPanel>
+				<StackPanel
+					Grid.Column="1" Grid.Row="1"
+					HorizontalAlignment="Center">
+					<TextBlock
+						Text="Изображение:"/>
+					<StackPanel
+						Name="stpanel_preview"
+						Orientation="Vertical"
+						HorizontalAlignment="Center"
+						IsVisible="False">
+						<Image
+							Name="img_preview"
+							Source="{Binding ProductImage}"
+							Width="100"/>
+						<TextBlock
+							Name="tblock_preview"
+							Text="{Binding Image}"/>
+					</StackPanel>
+					<StackPanel
+						Orientation="Horizontal"
+						HorizontalAlignment="Center">
+						<Button
+							Name="btn_delimage" FontSize="10"
+							Content="Удалить"
+							IsVisible="False"
+							Click="ImageDelete"/>
+						<Button
+							Name="btn_addImage" FontSize="10"
+							Content="Добавить"
+							Click="ImageAdd"/>
+					</StackPanel>
+					
+				</StackPanel>
+				<Button
+					Name="btn_return"
+					Content="Назад"
+					Grid.Row="2"
+					Grid.ColumnSpan="2"
+					Background="rgb(73, 140,81)"
+					Click="Return"/>
+				<Button
+					Name="btn_del"
+					Content="Удалить" IsVisible="False"
+					HorizontalAlignment="Center"
+					Grid.Row="2"
+					Grid.ColumnSpan="2"
+					Background="rgb(73, 140,81)"
+					Click="Delete"/>
+				<Button
+					Name="btn_add"
+					Grid.Row="2"
+					HorizontalAlignment="Right"
+					Grid.ColumnSpan="2"
+					Background="rgb(73, 140,81)"
+					Click="Confirm"/>
+			</Grid>
+		</Panel>
+	</Grid>
+</Window>
